@@ -1,0 +1,128 @@
+if (up) {
+    if (!Check.CollisionPlayerBlock(
+            new Point((int) (pos.xpos + GameLoop.map.xpos),
+                      (int) (pos.ypos + GameLoop.map.ypos - moveAmountU)),
+            new Point((int) (pos.xpos + GameLoop.map.xpos + width),
+                      (int) (pos.ypos + GameLoop.map.ypos - moveAmountU)))) {
+        if (speedUp < maxSpeed) {
+            speedUp += slowdown;
+        } else {
+            speedUp = maxSpeed;
+        }
+        pos.ypos -= moveAmountU;
+    } else {
+        speedUp = 0;
+    }
+} else {
+    if (!Check.CollisionPlayerBlock(
+            new Point((int) (pos.xpos + GameLoop.map.xpos),
+                    (int) (pos.ypos + GameLoop.map.ypos - moveAmountU)),
+            new Point((int) (pos.xpos + GameLoop.map.xpos + width),
+                    (int) (pos.ypos + GameLoop.map.ypos - moveAmountU)))) {
+        if (speedUp != 0) {
+            speedUp -= slowdown;
+            if (speedUp < 0) {
+                speedUp = 0;
+            }
+        }
+        pos.ypos -= moveAmountU;
+    } else {
+        speedUp = 0;
+    }
+}
+if (down) {
+    if (!Check.CollisionPlayerBlock(
+            new Point((int) (pos.xpos + GameLoop.map.xpos),
+                    (int) (pos.ypos + GameLoop.map.ypos + height + moveAmountD)),
+            new Point((int) (pos.xpos + GameLoop.map.xpos + width),
+                    (int) (pos.ypos + GameLoop.map.ypos + height + moveAmountD)))) {
+        if (speedDown < maxSpeed) {
+            speedDown += slowdown;
+        } else {
+            speedDown = maxSpeed;
+        }
+        pos.ypos += moveAmountD;
+    } else {
+        speedDown = 0;
+    }
+} else {
+    if (!Check.CollisionPlayerBlock(
+            new Point((int) (pos.xpos + GameLoop.map.xpos),
+                    (int) (pos.ypos + GameLoop.map.ypos + height + moveAmountD)),
+            new Point((int) (pos.xpos + GameLoop.map.xpos + width),
+                    (int) (pos.ypos + GameLoop.map.ypos + height + moveAmountD)))) {
+        if (speedDown != 0) {
+            speedDown -= slowdown;
+            if (speedDown < 0) {
+                speedDown = 0;
+            }
+        }
+    } else {
+        speedDown = 0;
+    }
+    pos.ypos += moveAmountD;
+}
+if (right) {
+    if (!Check.CollisionPlayerBlock(
+            new Point((int) (pos.xpos + GameLoop.map.xpos + width + moveAmountR),
+                    (int) (pos.ypos + GameLoop.map.ypos)),
+            new Point((int) (pos.xpos + GameLoop.map.xpos + width + moveAmountR),
+                    (int) (pos.ypos + GameLoop.map.ypos + height)))) {
+        if (speedRight < maxSpeed) {
+            speedRight += slowdown;
+        } else {
+            speedRight = maxSpeed;
+        }
+        pos.xpos += moveAmountR;
+    } else {
+        speedRight = 0;
+    }
+} else {
+    if (!Check.CollisionPlayerBlock(
+            new Point((int) (pos.xpos + GameLoop.map.xpos + width + moveAmountR),
+                    (int) (pos.ypos + GameLoop.map.ypos)),
+            new Point((int) (pos.xpos + GameLoop.map.xpos + width + moveAmountR),
+                    (int) (pos.ypos + GameLoop.map.ypos + height)))) {
+        if (speedRight != 0) {
+            speedRight -= slowdown;
+            if (speedRight < 0) {
+                speedRight = 0;
+            }
+        }
+        pos.xpos += moveAmountR;
+    } else {
+        speedRight = 0;
+    }
+}
+if (left) {
+    if (!Check.CollisionPlayerBlock(
+            new Point((int) (pos.xpos + GameLoop.map.xpos - moveAmountL),
+                    (int) (pos.ypos + GameLoop.map.ypos + height)),
+            new Point((int) (pos.xpos + GameLoop.map.xpos - moveAmountL),
+                    (int) (pos.ypos + GameLoop.map.ypos + height)))) {
+        if (speedLeft < maxSpeed) {
+            speedLeft += slowdown;
+        } else {
+            speedLeft = maxSpeed;
+        }
+        pos.xpos -= moveAmountL;
+    } else {
+        speedLeft = 0;
+    }
+} else {
+    if (!Check.CollisionPlayerBlock(
+            new Point((int) (pos.xpos + GameLoop.map.xpos - moveAmountL),
+                    (int) (pos.ypos + GameLoop.map.ypos + height)),
+            new Point((int) (pos.xpos + GameLoop.map.xpos - moveAmountL),
+                    (int) (pos.ypos + GameLoop.map.ypos + height)))) {
+        if (speedLeft != 0) {
+            speedLeft -= slowdown;
+            if (speedLeft < 0) {
+                speedLeft = 0;
+            }
+        }
+        pos.xpos -= moveAmountL;
+    } else {
+        speedLeft = 0;
+    }
+}
