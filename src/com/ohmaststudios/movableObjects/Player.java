@@ -1,13 +1,18 @@
 package com.ohmaststudios.movableObjects;
 
+import com.ohmaststudios.assets.Assets;
 import com.ohmaststudios.engine.Vector2F;
+import com.ohmaststudios.engine.loadImageFrom;
 import com.ohmaststudios.gameloop.GameLoop;
 import com.ohmaststudios.main.Check;
 import com.ohmaststudios.main.Game;
+import com.ohmaststudios.managers.GUIManager;
+import com.ohmaststudios.managers.HUDManager;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.IOException;
 
 public class Player implements KeyListener {
 
@@ -25,8 +30,13 @@ public class Player implements KeyListener {
     private int renderDistanceH = Game.height;
     public static Rectangle render;
 
+    private HUDManager hudm;
+    private GUIManager guim;
+
     public Player () {
         pos = new Vector2F(Game.width / 2 - width / 2, Game.height / 2 - height / 2);
+        hudm = new HUDManager(this);
+        guim = new GUIManager();
     }
 
     public void init () {
@@ -204,12 +214,9 @@ public class Player implements KeyListener {
     }
 
     public void render(Graphics2D g) {
+        guim.render(g);
+        hudm.render(g);
         g.fillRect((int) pos.xpos, (int) pos.ypos, width, height);
-
-        g.setColor(Color.BLACK);
-        g.fillRect(0, 0, Game.width, Game.height / 7);
-        g.fillRect(0, 1000, Game.width, Game.height / 6);
-        g.setColor(Color.WHITE);
     }
 
     //////////////////////////
@@ -252,5 +259,18 @@ public class Player implements KeyListener {
         if(key == KeyEvent.VK_D) {
             right = false;
         }
+    }
+
+    //////////////////////////
+
+
+    public Vector2F getPos() {
+        return pos;
+    }
+    public float getMaxSpeed() {
+        return maxSpeed;
+    }
+    public float getSlowdown() {
+        return slowdown;
     }
 }
