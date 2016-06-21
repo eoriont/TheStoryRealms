@@ -2,9 +2,12 @@ package com.ohmaststudios.main;
 
 import com.ohmaststudios.engine.GameWindow;
 import com.ohmaststudios.gameloop.GameLoop;
+import com.ohmaststudios.managers.MouseManager;
 import com.ohmaststudios.movableObjects.Player;
 
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 public class Game {
 
@@ -18,6 +21,9 @@ public class Game {
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         Cursor cursor = toolkit.createCustomCursor(toolkit.getImage(""), new Point(0, 0), "Cursor");
         frame.setCursor(cursor);
+        frame.addMouseListener(new MouseManager());
+        frame.addMouseMotionListener(new MouseManager());
+        frame.addMouseWheelListener(new MouseManager());
         frame.addKeyListener(new Player());
         frame.add(new GameLoop(width, height));
         frame.setVisible(true);

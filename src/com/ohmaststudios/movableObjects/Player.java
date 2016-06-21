@@ -4,10 +4,12 @@ import com.ohmaststudios.assets.Assets;
 import com.ohmaststudios.engine.Vector2F;
 import com.ohmaststudios.engine.loadImageFrom;
 import com.ohmaststudios.gameloop.GameLoop;
+import com.ohmaststudios.generator.World;
 import com.ohmaststudios.main.Check;
 import com.ohmaststudios.main.Game;
 import com.ohmaststudios.managers.GUIManager;
 import com.ohmaststudios.managers.HUDManager;
+import com.ohmaststudios.managers.MouseManager;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -24,6 +26,7 @@ public class Player implements KeyListener {
     private float fixDt = 1f/60f;
     private float speedUp = 0, speedDown = 0, speedRight = 0, speedLeft = 0;
     private boolean mapMove = true;
+    private World world;
 
     //RENDER
     private int renderDistanceW = Game.width;
@@ -32,6 +35,7 @@ public class Player implements KeyListener {
 
     private HUDManager hudm;
     private GUIManager guim;
+    private MouseManager playermMM = new MouseManager();
 
     public Player () {
         pos = new Vector2F(Game.width / 2 - width / 2, Game.height / 2 - height / 2);
@@ -39,7 +43,8 @@ public class Player implements KeyListener {
         guim = new GUIManager();
     }
 
-    public void init () {
+    public void init (World world) {
+        this.world = world;
         render = new Rectangle(
                 (int) (pos.xpos - pos.getWorldLocation().xpos + pos.xpos - renderDistanceW * 32 / 2 + width / 2),
                 (int) (pos.ypos - pos.getWorldLocation().ypos + pos.ypos - renderDistanceH * 32 / 2 + height / 2),
@@ -47,6 +52,8 @@ public class Player implements KeyListener {
     }
 
     public void tick (double deltaTime) {
+        playermMM.tick();
+
         render = new Rectangle(
                 (int) (pos.xpos - pos.getWorldLocation().xpos + pos.xpos - renderDistanceW * 32 / 2 + width / 2),
                 (int) (pos.ypos - pos.getWorldLocation().ypos + pos.ypos - renderDistanceH * 32 / 2 + height / 2),
@@ -214,9 +221,10 @@ public class Player implements KeyListener {
     }
 
     public void render(Graphics2D g) {
+        g.fillRect((int) pos.xpos, (int) pos.ypos, width, height);
         guim.render(g);
         hudm.render(g);
-        g.fillRect((int) pos.xpos, (int) pos.ypos, width, height);
+        playermMM.render(g);
     }
 
     //////////////////////////
@@ -273,4 +281,5 @@ public class Player implements KeyListener {
     public float getSlowdown() {
         return slowdown;
     }
+
 }
