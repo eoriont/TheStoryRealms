@@ -1,7 +1,6 @@
 package com.ohmaststudios.movableObjects;
 
 import com.ohmaststudios.engine.Vector2F;
-import com.ohmaststudios.engine.loadImageFrom;
 import com.ohmaststudios.gameloop.GameLoop;
 import com.ohmaststudios.main.Check;
 import com.ohmaststudios.main.Game;
@@ -9,7 +8,6 @@ import com.ohmaststudios.main.Game;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.image.BufferedImage;
 
 public class Player implements KeyListener {
 
@@ -22,15 +20,28 @@ public class Player implements KeyListener {
     private float speedUp = 0, speedDown = 0, speedRight = 0, speedLeft = 0;
     private boolean mapMove = true;
 
+    //RENDER
+    private int renderDistanceW = Game.width;
+    private int renderDistanceH = Game.height;
+    public static Rectangle render;
+
     public Player () {
         pos = new Vector2F(Game.width / 2 - width / 2, Game.height / 2 - height / 2);
     }
 
     public void init () {
-
+        render = new Rectangle(
+                (int) (pos.xpos - pos.getWorldLocation().xpos + pos.xpos - renderDistanceW * 32 / 2 + width / 2),
+                (int) (pos.ypos - pos.getWorldLocation().ypos + pos.ypos - renderDistanceH * 32 / 2 + height / 2),
+                renderDistanceW*32, renderDistanceH*32);
     }
 
     public void tick (double deltaTime) {
+        render = new Rectangle(
+                (int) (pos.xpos - pos.getWorldLocation().xpos + pos.xpos - renderDistanceW * 32 / 2 + width / 2),
+                (int) (pos.ypos - pos.getWorldLocation().ypos + pos.ypos - renderDistanceH * 32 / 2 + height / 2),
+                renderDistanceW*32, renderDistanceH*32);
+
         float moveAmountU = speedUp * fixDt;
         float moveAmountD = speedDown * fixDt;
         float moveAmountL = speedLeft * fixDt;
@@ -194,6 +205,11 @@ public class Player implements KeyListener {
 
     public void render(Graphics2D g) {
         g.fillRect((int) pos.xpos, (int) pos.ypos, width, height);
+
+        g.setColor(Color.BLACK);
+        g.fillRect(0, 0, Game.width, Game.height / 7);
+        g.fillRect(0, 1000, Game.width, Game.height / 6);
+        g.setColor(Color.WHITE);
     }
 
     //////////////////////////
