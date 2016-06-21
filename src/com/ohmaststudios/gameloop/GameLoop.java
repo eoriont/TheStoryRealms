@@ -3,7 +3,7 @@ package com.ohmaststudios.gameloop;
 import com.ohmaststudios.engine.OGameLoop;
 import com.ohmaststudios.engine.Vector2F;
 import com.ohmaststudios.gamestate.GameStateManager;
-import com.ohmaststudios.main.Assets;
+import com.ohmaststudios.assets.Assets;
 
 public class GameLoop extends OGameLoop {
 

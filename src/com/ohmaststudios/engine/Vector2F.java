@@ -32,11 +32,9 @@ public class Vector2F {
     public Vector2F getScreenLocation() {
         return new Vector2F(xpos, ypos);
     }
-
     public Vector2F getWorldLocation() {
         return new Vector2F(xpos - worldXpos, ypos - worldYpos);
     }
-
     public boolean equals(Vector2F vec) {
         return (this.xpos == vec.xpos && this.ypos == vec.ypos);
     }

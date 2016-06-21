@@ -1,7 +1,7 @@
 package com.ohmaststudios.generator;
 
 import com.ohmaststudios.engine.Vector2F;
-import com.ohmaststudios.main.Assets;
+import com.ohmaststudios.assets.Assets;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -34,7 +34,7 @@ public class Block extends Rectangle {
                 block = Assets.stone1;
                 break;
             case WALL_1:
-                block = Assets.wall_1;
+                block = Assets.wall1;
                 break;
         }
     }

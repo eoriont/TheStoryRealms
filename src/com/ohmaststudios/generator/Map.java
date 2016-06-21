@@ -1,8 +1,8 @@
 package com.ohmaststudios.generator;
 
+import com.ohmaststudios.assets.Assets;
 import com.ohmaststudios.engine.Vector2F;
 import com.ohmaststudios.engine.loadImageFrom;
-import com.ohmaststudios.main.Game;
 import com.ohmaststudios.movableObjects.Player;
 
 import java.awt.*;
@@ -22,7 +22,7 @@ public class Map {
 
         BufferedImage map = null;
         try {
-            map = loadImageFrom.LoadImageFrom(Game.class, "map.png");
+            map = loadImageFrom.LoadImageFrom(Assets.class, "map.png");
         } catch (Exception e) {
 
         }
