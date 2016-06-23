@@ -254,6 +254,14 @@ public class Player implements KeyListener {
         if(key == KeyEvent.VK_D) {
             right = true;
         }
+        if(key == KeyEvent.VK_R) {
+            Game.frame.invalidate();
+            Game.frame.revalidate();
+            Game.frame.repaint();
+        }
+        if(key == KeyEvent.VK_ESCAPE) {
+            System.exit(1);
+        }
 
     }
     @Override

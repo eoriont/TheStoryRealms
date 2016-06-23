@@ -6,17 +6,16 @@ import com.ohmaststudios.managers.MouseManager;
 import com.ohmaststudios.movableObjects.Player;
 
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 public class Game {
 
     public static GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
     public static int width = gd.getDisplayMode().getWidth();
     public static int height = gd.getDisplayMode().getHeight();
+    public static GameWindow frame;
 
     public static void main(String[] args) {
-        GameWindow frame = new GameWindow("The Story Realms", width, height);
+        frame = new GameWindow("The Story Realms", width, height);
         frame.setFullscreen(1);
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         Cursor cursor = toolkit.createCustomCursor(toolkit.getImage(""), new Point(0, 0), "Cursor");

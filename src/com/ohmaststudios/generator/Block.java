@@ -2,6 +2,7 @@ package com.ohmaststudios.generator;
 
 import com.ohmaststudios.engine.Vector2F;
 import com.ohmaststudios.assets.Assets;
+import com.ohmaststudios.main.Game;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -9,7 +10,7 @@ import java.awt.image.BufferedImage;
 public class Block extends Rectangle {
 
     Vector2F pos = new Vector2F();
-    public static int BlockSize = 48;
+    public static int BlockSize = Game.width / 32;
     private BlockType blockType;
     private BufferedImage block;
     private boolean isSolid;
