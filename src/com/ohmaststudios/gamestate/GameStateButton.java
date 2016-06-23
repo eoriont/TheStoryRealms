@@ -3,11 +3,13 @@ package com.ohmaststudios.gamestate;
 import com.ohmaststudios.engine.Vector2F;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public class GameStateButton extends Rectangle {
 
-    private Vector2F pos;
+    private Vector2F pos = new Vector2F();
     private GameState gameState;
+    private BufferedImage defaultImage;
     GameStateManager gsm;
 
     private boolean isClicked, isHeldOver;
@@ -33,13 +35,7 @@ public class GameStateButton extends Rectangle {
     }
 
     public void render(Graphics2D g) {
-        if(!isHeldOver) {
-            g.fillRect((int) pos.xpos, (int) pos.ypos, width, height);
-        } else {
-            g.setColor(Color.GREEN);
-            g.fillRect((int) pos.xpos, (int) pos.ypos, width, height);
-            g.setColor(Color.YELLOW);
-        }
+        g.drawImage(defaultImage, (int) pos.xpos, (int) pos.ypos, width, height, null);
     }
 
     public boolean isClicked() {

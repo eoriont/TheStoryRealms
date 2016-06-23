@@ -23,6 +23,13 @@ public class Block extends Rectangle {
         this.blockType = blockType;
         init();
     }
+
+    public Block(Vector2F pos) {
+        setBounds((int) pos.xpos, (int) pos.ypos, BlockSize, BlockSize);
+        this.pos = pos;
+        isAlive = true;
+    }
+
     public Block isSolid(boolean isSolid) {
         setBounds((int) pos.xpos, (int) pos.ypos, BlockSize, BlockSize);
         this.isSolid = isSolid;

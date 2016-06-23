@@ -1,10 +1,7 @@
 package com.ohmaststudios.movableObjects;
 
-import com.ohmaststudios.assets.Assets;
 import com.ohmaststudios.engine.Vector2F;
-import com.ohmaststudios.engine.loadImageFrom;
 import com.ohmaststudios.gameloop.GameLoop;
-import com.ohmaststudios.gamestate.GameState;
 import com.ohmaststudios.gamestate.GameStateButton;
 import com.ohmaststudios.generator.World;
 import com.ohmaststudios.main.Check;
@@ -16,7 +13,6 @@ import com.ohmaststudios.managers.MouseManager;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.io.IOException;
 
 public class Player implements KeyListener {
 
@@ -31,8 +27,8 @@ public class Player implements KeyListener {
     private World world;
 
     //RENDER
-    private int renderDistanceW = Game.width;
-    private int renderDistanceH = Game.height;
+    private int renderDistanceW = 60;
+    private int renderDistanceH = 34;
     public static Rectangle render;
 
     private HUDManager hudm;
@@ -41,11 +37,11 @@ public class Player implements KeyListener {
 
     public Player () {
         pos = new Vector2F(Game.width / 2 - width / 2, Game.height / 2 - height / 2);
-        hudm = new HUDManager(this);
-        guim = new GUIManager();
     }
 
     public void init (World world) {
+        hudm = new HUDManager(this);
+        guim = new GUIManager();
         this.world = world;
         render = new Rectangle(
                 (int) (pos.xpos - pos.getWorldLocation().xpos + pos.xpos - renderDistanceW * 32 / 2 + width / 2),
@@ -55,6 +51,7 @@ public class Player implements KeyListener {
 
     public void tick (double deltaTime) {
         playermMM.tick();
+        button.tick();
 
         render = new Rectangle(
                 (int) (pos.xpos - pos.getWorldLocation().xpos + pos.xpos - renderDistanceW * 32 / 2 + width / 2),
@@ -222,14 +219,14 @@ public class Player implements KeyListener {
         }
     }
 
-    GameStateButton button = new GameStateButton(200, 200);
+    GameStateButton button = new GameStateButton((float) 200, (float) 200);
 
     public void render(Graphics2D g) {
         g.fillRect((int) pos.xpos, (int) pos.ypos, width, height);
         guim.render(g);
         hudm.render(g);
-        playermMM.render(g);
         button.render(g);
+        playermMM.render(g);
     }
 
     //////////////////////////
