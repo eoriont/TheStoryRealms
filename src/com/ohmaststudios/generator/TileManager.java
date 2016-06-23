@@ -8,6 +8,7 @@ import java.util.ArrayList;
 public class TileManager {
 
     public static ArrayList<Block> blocks = new ArrayList<Block>();
+    public static int blocksAreAlive;
 
     public TileManager() {
 
@@ -21,8 +22,12 @@ public class TileManager {
     }
 
     public void render(Graphics2D g) {
+        blocksAreAlive = 0;
         for(Block block : blocks) {
-            block.render(g);
+            if(block.isAlive) {
+                blocksAreAlive++;
+                block.render(g);
+            }
         }
     }
 
