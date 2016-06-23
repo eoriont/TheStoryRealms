@@ -1,16 +1,16 @@
 package com.ohmaststudios.gamestates;
 
-import com.ohmaststudios.assets.Assets;
-import com.ohmaststudios.engine.loadImageFrom;
 import com.ohmaststudios.gamestate.GameState;
 import com.ohmaststudios.gamestate.GameStateManager;
-import com.ohmaststudios.generator.Map;
+import com.ohmaststudios.generator.World;
+import com.ohmaststudios.movableObjects.Player;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public class LevelLoader extends GameState {
 
-    Map map;
+    World world;
 
     public LevelLoader(GameStateManager gsm) {
         super(gsm);
@@ -18,17 +18,20 @@ public class LevelLoader extends GameState {
 
     @Override
     public void init() {
-        map = new Map();
-        map.init();
+        world = new World("world");
+        world.setSize(100, 100);
+        world.addPlayer(new Player());
+        world.init();
+        world.generate("map");
     }
 
     @Override
     public void tick(double deltaTime) {
-        map.tick(deltaTime);
+        world.tick(deltaTime);
     }
 
     @Override
     public void render(Graphics2D g) {
-        map.render(g);
+        world.render(g);
     }
 }
