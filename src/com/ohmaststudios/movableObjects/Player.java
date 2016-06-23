@@ -4,6 +4,8 @@ import com.ohmaststudios.assets.Assets;
 import com.ohmaststudios.engine.Vector2F;
 import com.ohmaststudios.engine.loadImageFrom;
 import com.ohmaststudios.gameloop.GameLoop;
+import com.ohmaststudios.gamestate.GameState;
+import com.ohmaststudios.gamestate.GameStateButton;
 import com.ohmaststudios.generator.World;
 import com.ohmaststudios.main.Check;
 import com.ohmaststudios.main.Game;
@@ -220,11 +222,14 @@ public class Player implements KeyListener {
         }
     }
 
+    GameStateButton button = new GameStateButton(200, 200);
+
     public void render(Graphics2D g) {
         g.fillRect((int) pos.xpos, (int) pos.ypos, width, height);
         guim.render(g);
         hudm.render(g);
         playermMM.render(g);
+        button.render(g);
     }
 
     //////////////////////////
