@@ -1,7 +1,6 @@
 package com.ohmaststudios.managers;
 
 import com.ohmaststudios.assets.Assets;
-
 import java.awt.*;
 import java.awt.event.*;
 
