@@ -56,9 +56,6 @@ public class Block extends Rectangle {
     public void render(Graphics2D g) {
         if (isAlive) {
             g.drawImage(block, (int) pos.getWorldLocation().xpos, (int) pos.getWorldLocation().ypos, BlockSize, BlockSize, null);
-            if (isSolid) {
-                g.drawRect((int) pos.getWorldLocation().xpos, (int) pos.getWorldLocation().ypos, BlockSize, BlockSize);
-            }
         }
     }
 
