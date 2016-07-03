@@ -12,6 +12,7 @@ public class Assets {
 
     public static BufferedImage stone1, wall1;
     public static BufferedImage mouse1, mouse2;
+    public static BufferedImage newBlock;
 
     public void init() {
         blocks.setSpriteSheet(loadImageFrom.LoadImageFrom(this.getClass(), "spritesheet.png"));
@@ -22,6 +23,8 @@ public class Assets {
 
         mouse1 = widgets.getTile(0, 0, 5, 5);
         mouse2 = widgets.getTile(14, 0, 5, 5);
+
+        newBlock = blocks.getTile(0, 32, 16, 16);
     }
 
 }

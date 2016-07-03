@@ -56,6 +56,7 @@ public class World {
                         case 0x404040:
                             tiles.blocks.add(new Block(new Vector2F(x*Block.BlockSize, y*Block.BlockSize), Block.BlockType.WALL_1).isSolid(true));
                             break;
+
                     }
                 }
             }
