@@ -2,7 +2,10 @@ package com.ohmaststudios.movableObjects;
 
 import com.ohmaststudios.engine.Vector2F;
 import com.ohmaststudios.gameloop.GameLoop;
+import com.ohmaststudios.gamestate.GameState;
 import com.ohmaststudios.gamestate.GameStateButton;
+import com.ohmaststudios.gamestate.GameStateManager;
+import com.ohmaststudios.gamestates.QuitState;
 import com.ohmaststudios.generator.World;
 import com.ohmaststudios.main.Check;
 import com.ohmaststudios.main.Game;
@@ -25,6 +28,7 @@ public class Player implements KeyListener {
     private float speedUp = 0, speedDown = 0, speedRight = 0, speedLeft = 0;
     private boolean mapMove = true;
     private World world;
+    private GameStateManager gsm;
 
     //RENDER
     private int renderDistanceW = 60;
@@ -51,7 +55,6 @@ public class Player implements KeyListener {
 
     public void tick (double deltaTime) {
         playermMM.tick();
-        button.tick();
 
         render = new Rectangle(
                 (int) (pos.xpos - pos.getWorldLocation().xpos + pos.xpos - renderDistanceW * 32 / 2 + width / 2),
@@ -219,13 +222,10 @@ public class Player implements KeyListener {
         }
     }
 
-    GameStateButton button = new GameStateButton((float) 200, (float) 200);
-
     public void render(Graphics2D g) {
         g.fillRect((int) pos.xpos, (int) pos.ypos, width, height);
         guim.render(g);
         hudm.render(g);
-        button.render(g);
         playermMM.render(g);
     }
 
@@ -250,6 +250,10 @@ public class Player implements KeyListener {
         }
         if(key == KeyEvent.VK_D) {
             right = true;
+        }
+        if(key == KeyEvent.VK_ESCAPE) {
+            gsm.states.push(new QuitState(gsm));
+            gsm.states.peek().init();
         }
 
     }
