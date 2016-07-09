@@ -11,7 +11,7 @@ public class Assets {
     private SpriteSheet widgets = new SpriteSheet();
 
     public static BufferedImage stone1, wall1;
-    public static BufferedImage mouse1, mouse2;
+    public static BufferedImage mouse1, mouse2, mouse3, mouse4;
     public static BufferedImage newBlock;
     public static BufferedImage button1, button2;
 
@@ -23,7 +23,9 @@ public class Assets {
         wall1 = blocks.getTile(16, 0, 16, 16);
 
         mouse1 = widgets.getTile(0, 0, 5, 5);
-        mouse2 = widgets.getTile(14, 0, 5, 5);
+        mouse2 = widgets.getTile(0, 5, 5, 5);
+        mouse3 = widgets.getTile(5, 0, 5, 5);
+        mouse4 = widgets.getTile(5, 5, 5, 5);
 
         newBlock = blocks.getTile(0, 32, 16, 16);
 

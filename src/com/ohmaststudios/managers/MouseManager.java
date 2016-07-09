@@ -11,15 +11,20 @@ public class MouseManager implements MouseListener, MouseMotionListener, MouseWh
 
     public static boolean pressed;
 
+    public static MouseType mouseType;
+
     public void tick() {
         mouse = new Point(mouseMovedX, mouseMovedY);
+
     }
 
     public void render(Graphics2D g) {
         if (pressed) {
-            g.drawImage(Assets.mouse2, mouseMovedX, mouseMovedY, 32, 32, null);
+            if(mouseType == MouseType.POINTER) g.drawImage(Assets.mouse2, mouseMovedX, mouseMovedY, 32, 32, null);
+            if(mouseType == MouseType.FINGER) g.drawImage(Assets.mouse4, mouseMovedX, mouseMovedY, 32, 32, null);
         } else {
-            g.drawImage(Assets.mouse1, mouseMovedX, mouseMovedY, 32, 32, null);
+            if(mouseType == MouseType.POINTER) g.drawImage(Assets.mouse1, mouseMovedX, mouseMovedY, 32, 32, null);
+            if(mouseType == MouseType.FINGER) g.drawImage(Assets.mouse3, mouseMovedX, mouseMovedY, 32, 32, null);
         }
     }
 
@@ -61,4 +66,8 @@ public class MouseManager implements MouseListener, MouseMotionListener, MouseWh
     public void mouseExited(MouseEvent e) {}
     @Override
     public void mouseClicked(MouseEvent e) {}
+
+    public enum MouseType {
+        FINGER, POINTER, DISABLED
+    }
 }

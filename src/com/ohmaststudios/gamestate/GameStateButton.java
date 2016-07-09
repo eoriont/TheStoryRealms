@@ -41,8 +41,10 @@ public class GameStateButton extends Rectangle {
 
         if(getBounds().contains(MouseManager.mouse)) {
             isHeldOver = true;
+            MouseManager.mouseType = MouseManager.MouseType.FINGER;
         } else {
             isHeldOver = false;
+            MouseManager.mouseType = MouseManager.MouseType.POINTER;
         }
 
         if(isHeldOver) {
