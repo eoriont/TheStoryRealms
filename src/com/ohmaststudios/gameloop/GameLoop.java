@@ -9,7 +9,6 @@ public class GameLoop extends OGameLoop {
 
     GameStateManager gsm;
     public static Assets assets = new Assets();
-    public static Vector2F map = new Vector2F();
 
     public GameLoop(int fwidth, int fheight) {
         super(fwidth, fheight);
@@ -18,7 +17,6 @@ public class GameLoop extends OGameLoop {
     @Override
     public void init() {
         assets.init();
-        Vector2F.setWorldVariables(map.xpos, map.ypos);
         gsm = new GameStateManager();
         gsm.init();
         super.init();
@@ -26,7 +24,6 @@ public class GameLoop extends OGameLoop {
 
     @Override
     public void tick(double deltaTime) {
-        Vector2F.setWorldVariables(map.xpos, map.ypos);
         gsm.tick(deltaTime);
     }
 

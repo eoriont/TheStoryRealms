@@ -10,6 +10,7 @@ import java.awt.image.BufferedImage;
 
 public class World {
 
+    public static Vector2F mapPos = new Vector2F();
     private String worldName;
     private BufferedImage map;
     private int worldWidth, worldHeight;
@@ -19,32 +20,38 @@ public class World {
 
     private boolean hasSize = false;
 
+    private Block spawn;
+
     public World(String worldName) {
         this.worldName = worldName;
+        Vector2F.setWorldVariables(mapPos.xpos, mapPos.ypos);
     }
 
     public void init() {
         tiles = new TileManager();
         if(player != null) player.init(this);
+
+        mapPos.xpos = spawn.pos.xpos - player.getPos().xpos;
+        mapPos.ypos = spawn.pos.ypos - player.getPos().ypos;
     }
 
     public void tick(double deltaTime) {
+        spawn.tick(deltaTime);
         tiles.tick(deltaTime);
         if(player != null) player.tick(deltaTime);
+        Vector2F.setWorldVariables(mapPos.xpos, mapPos.ypos);
     }
 
     public void render(Graphics2D g) {
         tiles.render(g);
+        spawn.render(g);
         if(player != null) player.render(g);
     }
 
     public void generate(String worldImageName) {
         map = null;
         if(hasSize) {
-            try {
-                map = loadImageFrom.LoadImageFrom(Assets.class, worldImageName + ".png");
-            } catch (Exception e) {
-            }
+            try{map = loadImageFrom.LoadImageFrom(Assets.class, worldImageName + ".png");}catch(Exception e){}
 
             for(int x = 0; x < worldWidth; x++) {
                 for(int y = 0; y < worldHeight; y++) {
@@ -63,13 +70,34 @@ public class World {
         }
     }
 
+    public void setWorldSpawn(float xpos, float ypos) {
+        if(xpos < worldWidth) {
+            if(ypos < worldHeight) {
+                Block spawn = new Block(new Vector2F(xpos*Block.BlockSize, ypos*Block.BlockSize));
+                this.spawn = spawn;
+            }
+        }
+    }
+
     public void setSize(int worldWidth, int worldHeight) {
         this.worldWidth = worldWidth;
         this.worldHeight = worldHeight;
         hasSize = true;
     }
 
+    public Vector2F getWorldSpawn() {
+        return spawn.pos;
+    }
     public void addPlayer(Player player) {
         this.player = player;
+    }
+    public Vector2F getWorldLocation() {
+        return mapPos;
+    }
+    public float getWorldXpos() {
+        return mapPos.xpos;
+    }
+    public float getWorldYpos() {
+        return mapPos.ypos;
     }
 }

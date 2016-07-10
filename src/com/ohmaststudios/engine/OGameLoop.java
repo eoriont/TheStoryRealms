@@ -42,7 +42,7 @@ public class OGameLoop extends JPanel implements Runnable {
         //INIT
         init();
 
-        long lastTime= System.nanoTime();
+        long lastTime = System.nanoTime();
         double nsPerTick = 1000000000D / currFPS;
         int frames = 0;
         int ticks = 0;

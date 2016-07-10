@@ -20,6 +20,7 @@ public class LevelLoader extends GameState {
     public void init() {
         world = new World("world");
         world.setSize(100, 100);
+        world.setWorldSpawn(10, 10);
         world.addPlayer(new Player());
         world.init();
         world.generate("map");

@@ -15,6 +15,7 @@ public class TileManager {
     }
 
     public void tick(double deltaTime) {
+
         for(Block block : blocks) {
             block.tick(deltaTime);
             block.setAlive(Player.render.intersects(block));
@@ -22,7 +23,9 @@ public class TileManager {
     }
 
     public void render(Graphics2D g) {
+
         blocksAreAlive = 0;
+
         for(Block block : blocks) {
             if(block.isAlive) {
                 blocksAreAlive++;
