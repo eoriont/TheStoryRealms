@@ -1,25 +1,17 @@
 package com.ohmaststudios.movableObjects;
 
 import com.ohmaststudios.engine.Vector2F;
-import com.ohmaststudios.gameloop.GameLoop;
-import com.ohmaststudios.gamestate.GameState;
-import com.ohmaststudios.gamestate.GameStateButton;
-import com.ohmaststudios.gamestate.GameStateManager;
-import com.ohmaststudios.gamestates.QuitState;
 import com.ohmaststudios.generator.World;
 import com.ohmaststudios.main.Check;
 import com.ohmaststudios.main.Game;
-import com.ohmaststudios.managers.GUIManager;
 import com.ohmaststudios.managers.HUDManager;
-import com.ohmaststudios.managers.MouseManager;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
 public class Player {
 
-    Vector2F pos;
+    private Vector2F pos;
     private int width = 42;
     private int height = 42;
     private boolean up, down, left, right;
@@ -29,16 +21,13 @@ public class Player {
     private boolean mapMove = true;
     private boolean debug = false;
     private World world;
-    private GameStateManager gsm;
 
     //RENDER
     private int renderDistanceW = 60;
     private int renderDistanceH = 34;
-    public static Rectangle render;
+    public Rectangle render;
 
     private HUDManager hudm;
-    private GUIManager guim;
-    private MouseManager playermMM = new MouseManager();
 
     public Player () {
         pos = new Vector2F(Game.width / 2 - width / 2, Game.height / 2 - height / 2);
@@ -46,7 +35,6 @@ public class Player {
 
     public void init (World world) {
         hudm = new HUDManager(this, world);
-        guim = new GUIManager();
         this.world = world;
         render = new Rectangle(
                 (int) (pos.xpos - pos.getWorldLocation().xpos + pos.xpos - renderDistanceW * 32 / 2 + width / 2),
@@ -55,8 +43,6 @@ public class Player {
     }
 
     public void tick (double deltaTime) {
-        playermMM.tick();
-
         render = new Rectangle(
                 (int) (pos.xpos - pos.getWorldLocation().xpos + pos.xpos - renderDistanceW * 32 / 2 + width / 2),
                 (int) (pos.ypos - pos.getWorldLocation().ypos + pos.ypos - renderDistanceH * 32 / 2 + height / 2),
@@ -90,7 +76,7 @@ public class Player {
         }
     }
 
-    public void moveMapUp(float speed) {
+    private void moveMapUp(float speed) {
         if (!Check.CollisionPlayerBlock(
                 new Point((int) (pos.xpos + world.mapPos.xpos),
                         (int) (pos.ypos + world.mapPos.ypos - speed)),
@@ -106,7 +92,7 @@ public class Player {
             speedUp = 0;
         }
     }
-    public void moveMapUpGlide(float speed) {
+    private void moveMapUpGlide(float speed) {
         if (!Check.CollisionPlayerBlock(
                 new Point((int) (pos.xpos + world.mapPos.xpos),
                         (int) (pos.ypos + world.mapPos.ypos - speed)),
@@ -123,7 +109,7 @@ public class Player {
             speedUp = 0;
         }
     }
-    public void moveMapDown(float speed) {
+    private void moveMapDown(float speed) {
         if (!Check.CollisionPlayerBlock(
                 new Point((int) (pos.xpos + world.mapPos.xpos),
                         (int) (pos.ypos + world.mapPos.ypos + height + speed)),
@@ -139,7 +125,7 @@ public class Player {
             speedDown = 0;
         }
     }
-    public void moveMapDownGlide(float speed) {
+    private void moveMapDownGlide(float speed) {
         if (!Check.CollisionPlayerBlock(
                 new Point((int) (pos.xpos + world.mapPos.xpos),
                         (int) (pos.ypos + world.mapPos.ypos + height + speed)),
@@ -156,7 +142,7 @@ public class Player {
             speedDown = 0;
         }
     }
-    public void moveMapRight(float speed) {
+    private void moveMapRight(float speed) {
         if (!Check.CollisionPlayerBlock(
                 new Point((int) (pos.xpos + world.mapPos.xpos + width + speed),
                         (int) (pos.ypos + world.mapPos.ypos)),
@@ -172,7 +158,7 @@ public class Player {
             speedRight = 0;
         }
     }
-    public void moveMapRightGlide(float speed) {
+    private void moveMapRightGlide(float speed) {
         if (!Check.CollisionPlayerBlock(
                 new Point((int) (pos.xpos + world.mapPos.xpos + width + speed),
                         (int) (pos.ypos + world.mapPos.ypos)),
@@ -189,7 +175,7 @@ public class Player {
             speedRight = 0;
         }
     }
-    public void moveMapLeft(float speed) {
+    private void moveMapLeft(float speed) {
         if (!Check.CollisionPlayerBlock(
                 new Point((int) (pos.xpos + world.mapPos.xpos - speed),
                         (int) (pos.ypos + world.mapPos.ypos + height)),
@@ -205,7 +191,7 @@ public class Player {
             speedLeft = 0;
         }
     }
-    public void moveMapLeftGlide(float speed) {
+    private void moveMapLeftGlide(float speed) {
         if (!Check.CollisionPlayerBlock(
                 new Point((int) (pos.xpos + world.mapPos.xpos - speed),
                         (int) (pos.ypos + world.mapPos.ypos + height)),
@@ -225,9 +211,7 @@ public class Player {
 
     public void render(Graphics2D g) {
         g.fillRect((int) pos.xpos, (int) pos.ypos, width, height);
-        guim.render(g);
         hudm.render(g);
-        playermMM.render(g);
     }
 
     //////////////////////////

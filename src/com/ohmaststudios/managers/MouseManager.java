@@ -15,7 +15,6 @@ public class MouseManager implements MouseListener, MouseMotionListener, MouseWh
 
     public void tick() {
         mouse = new Point(mouseMovedX, mouseMovedY);
-
     }
 
     public void render(Graphics2D g) {

@@ -2,6 +2,7 @@ package com.ohmaststudios.gamestate;
 
 import com.ohmaststudios.assets.Assets;
 import com.ohmaststudios.engine.Vector2F;
+import com.ohmaststudios.gameloop.GameLoop;
 import com.ohmaststudios.managers.MouseManager;
 
 import java.awt.*;

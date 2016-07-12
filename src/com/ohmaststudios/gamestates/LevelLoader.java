@@ -3,6 +3,7 @@ package com.ohmaststudios.gamestates;
 import com.ohmaststudios.gamestate.GameState;
 import com.ohmaststudios.gamestate.GameStateManager;
 import com.ohmaststudios.generator.World;
+import com.ohmaststudios.managers.MouseManager;
 import com.ohmaststudios.movableObjects.Player;
 
 import java.awt.*;
@@ -11,10 +12,10 @@ import java.awt.image.BufferedImage;
 
 public class LevelLoader extends GameState {
 
-    World world;
+    private World world;
 
-    public LevelLoader(GameStateManager gsm) {
-        super(gsm);
+    public LevelLoader(GameStateManager gsm, MouseManager mm) {
+        super(gsm, mm);
     }
 
     @Override

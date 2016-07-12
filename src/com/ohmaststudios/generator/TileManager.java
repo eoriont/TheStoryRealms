@@ -25,7 +25,7 @@ public class TileManager {
         if(!player.isDebug()) if(!blocksLoaded.isEmpty()) blocksLoaded.clear();
         for(Block block : blocks.values()) {
             block.tick(deltaTime);
-            if (Player.render.intersects(block)) {
+            if (world.getPlayer().render.intersects(block)) {
                 block.setAlive(true);
                 if(player.isDebug()) if(!blocksLoaded.containsKey(block.id)) blocksLoaded.put(block.id, block);
             } else {

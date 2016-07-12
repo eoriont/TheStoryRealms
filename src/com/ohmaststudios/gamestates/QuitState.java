@@ -11,13 +11,12 @@ import java.awt.event.KeyEvent;
 
 public class QuitState extends GameState {
 
-    MouseManager mm;
-    GameStateManager gsm;
-    GameStateButton no;
-    GameStateButton yes;
+    private GameStateManager gsm;
+    private GameStateButton no;
+    private GameStateButton yes;
 
-    public QuitState(GameStateManager gsm) {
-        super(gsm);
+    public QuitState(GameStateManager gsm, MouseManager mm) {
+        super(gsm, mm);
     }
 
     @Override
@@ -29,7 +28,6 @@ public class QuitState extends GameState {
 
     @Override
     public void tick(double deltaTime) {
-        mm.tick();
         yes.tick();
         no.tick();
 
@@ -37,7 +35,7 @@ public class QuitState extends GameState {
             System.exit(1);
         }
         if(no.isHeldOver() && no.isPressed()) {
-            gsm.states.push(new MenuState(gsm));
+            gsm.states.push(new MenuState(gsm, mm));
             gsm.states.peek().init();
         }
     }
@@ -46,8 +44,6 @@ public class QuitState extends GameState {
     public void render(Graphics2D g) {
         yes.render(g);
         no.render(g);
-
-        mm.render(g);
     }
 
 

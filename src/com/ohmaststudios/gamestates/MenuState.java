@@ -13,27 +13,23 @@ import java.awt.event.KeyEvent;
 
 public class MenuState extends GameState {
 
-    MouseManager mm;
-    GameStateManager gsm;
-    GameStateButton startButton;
-    GameStateButton options;
-    GameStateButton quit;
+    private GameStateButton startButton;
+    private GameStateButton options;
+    private GameStateButton quit;
 
-    public MenuState(GameStateManager gsm) {
-        super(gsm);
+    public MenuState(GameStateManager gsm, MouseManager mm) {
+        super(gsm, mm);
     }
 
     @Override
     public void init() {
-        mm = new MouseManager();
-        startButton = new GameStateButton(Game.width/3, 200, new LevelLoader(gsm), gsm, "Start Game");
-        options = new GameStateButton(Game.width/3, 400, new LevelLoader(gsm), gsm, "Options");
-        quit = new GameStateButton(Game.width/3, 600, new QuitState(gsm), gsm, "Quit");
+        startButton = new GameStateButton(Game.width/3, 200, new LevelLoader(gsm, mm), gsm, "Start Game");
+        options = new GameStateButton(Game.width/3, 400, new LevelLoader(gsm, mm), gsm, "Options");
+        quit = new GameStateButton(Game.width/3, 600, new QuitState(gsm, mm), gsm, "Quit");
     }
 
     @Override
     public void tick(double deltaTime) {
-        mm.tick();
         startButton.tick();
         options.tick();
         quit.tick();
@@ -44,8 +40,6 @@ public class MenuState extends GameState {
         startButton.render(g);
         options.render(g);
         quit.render(g);
-
-        mm.render(g);
     }
 
 

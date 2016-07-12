@@ -1,7 +1,7 @@
 package com.ohmaststudios.gamestate;
 
-import com.ohmaststudios.gamestates.LevelLoader;
 import com.ohmaststudios.gamestates.MenuState;
+import com.ohmaststudios.managers.MouseManager;
 
 import java.awt.*;
 import java.util.Stack;
@@ -12,7 +12,7 @@ public class GameStateManager {
 
     public GameStateManager() {
         states = new Stack<GameState>();
-        states.push(new LevelLoader(this));
+        states.push(new MenuState(this, new MouseManager()));
     }
 
     public void init() {

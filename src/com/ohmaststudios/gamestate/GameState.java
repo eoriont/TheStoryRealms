@@ -1,14 +1,18 @@
 package com.ohmaststudios.gamestate;
 
+import com.ohmaststudios.managers.MouseManager;
+
 import java.awt.*;
 import java.awt.event.KeyEvent;
 
 public abstract class GameState {
 
-    GameStateManager gsm;
+    protected GameStateManager gsm;
+    public  MouseManager mm;
 
-    public GameState(GameStateManager gsm) {
+    public GameState(GameStateManager gsm, MouseManager mm) {
         this.gsm = gsm;
+        this.mm = mm;
         init();
     }
 
