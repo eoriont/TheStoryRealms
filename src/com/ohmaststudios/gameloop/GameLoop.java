@@ -1,13 +1,14 @@
 package com.ohmaststudios.gameloop;
 
 import com.ohmaststudios.engine.OGameLoop;
-import com.ohmaststudios.engine.Vector2F;
 import com.ohmaststudios.gamestate.GameStateManager;
 import com.ohmaststudios.assets.Assets;
 
-public class GameLoop extends OGameLoop {
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
-    GameStateManager gsm;
+public class GameLoop extends OGameLoop implements KeyListener {
+    public GameStateManager gsm;
     public static Assets assets = new Assets();
 
     public GameLoop(int fwidth, int fheight) {
@@ -16,6 +17,7 @@ public class GameLoop extends OGameLoop {
 
     @Override
     public void init() {
+
         assets.init();
         gsm = new GameStateManager();
         gsm.init();
@@ -36,5 +38,22 @@ public class GameLoop extends OGameLoop {
     @Override
     public void clear() {
         super.clear();
+    }
+
+    ////////////////////////////////////////////////
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        gsm.states.peek().keyPressed(e);
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        gsm.states.peek().keyReleased(e);
     }
 }

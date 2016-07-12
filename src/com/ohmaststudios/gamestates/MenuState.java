@@ -9,6 +9,7 @@ import com.ohmaststudios.managers.MouseManager;
 import com.ohmaststudios.movableObjects.Player;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
 
 public class MenuState extends GameState {
 
@@ -45,5 +46,13 @@ public class MenuState extends GameState {
         quit.render(g);
 
         mm.render(g);
+    }
+
+
+    public void keyPressed(KeyEvent e) {
+
+    }
+    public void keyReleased(KeyEvent e) {
+
     }
 }

@@ -9,26 +9,28 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 public class TileManager {
 
-    public static HashMap<Integer, Block> blocks = new HashMap<Integer, Block>();
-    public static HashMap<Integer, Block> blocksLoaded = new HashMap<Integer, Block>();
-    public static int blocksAreAlive;
+    public HashMap<Integer, Block> blocks = new HashMap<Integer, Block>();
+    public HashMap<Integer, Block> blocksLoaded = new HashMap<Integer, Block>();
+    public int blocksAreAlive;
 
     private World world;
+    private Player player;
 
     public TileManager(World world) {
         this.world = world;
+        player = world.getPlayer();
     }
 
     public void tick(double deltaTime) {
-        if(!world.getPlayer().isDebug()) if(!blocksLoaded.isEmpty()) blocksLoaded.clear();
+        if(!player.isDebug()) if(!blocksLoaded.isEmpty()) blocksLoaded.clear();
         for(Block block : blocks.values()) {
             block.tick(deltaTime);
             if (Player.render.intersects(block)) {
                 block.setAlive(true);
-                if(Player.isDebug()) if(!blocksLoaded.containsKey(block.id)) blocksLoaded.put(block.id, block);
+                if(player.isDebug()) if(!blocksLoaded.containsKey(block.id)) blocksLoaded.put(block.id, block);
             } else {
                 block.setAlive(false);
-                if(Player.isDebug()) if(blocksLoaded.containsKey(block.id)) blocksLoaded.remove(block.id);
+                if(player.isDebug()) if(blocksLoaded.containsKey(block.id)) blocksLoaded.remove(block.id);
             }
         }
     }

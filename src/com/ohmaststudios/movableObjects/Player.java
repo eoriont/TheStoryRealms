@@ -17,17 +17,17 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-public class Player implements KeyListener {
+public class Player {
 
     Vector2F pos;
     private int width = 42;
     private int height = 42;
-    private static boolean up, down, left, right;
+    private boolean up, down, left, right;
     private float slowdown = 4.093f, maxSpeed = 3*32f;
     private float fixDt = 1f/60f;
     private float speedUp = 0, speedDown = 0, speedRight = 0, speedLeft = 0;
     private boolean mapMove = true;
-    private static boolean debug = false;
+    private boolean debug = false;
     private World world;
     private GameStateManager gsm;
 
@@ -67,7 +67,7 @@ public class Player implements KeyListener {
         float moveAmountL = speedLeft * fixDt;
         float moveAmountR = speedRight * fixDt;
         if (mapMove) {
-            if (up) {
+            if (this.up) {
                 moveMapUp(moveAmountU);
             } else {
                 moveMapUpGlide(moveAmountU);
@@ -92,132 +92,132 @@ public class Player implements KeyListener {
 
     public void moveMapUp(float speed) {
         if (!Check.CollisionPlayerBlock(
-                new Point((int) (pos.xpos + World.mapPos.xpos),
-                        (int) (pos.ypos + World.mapPos.ypos - speed)),
-                new Point((int) (pos.xpos + World.mapPos.xpos + width),
-                        (int) (pos.ypos + World.mapPos.ypos - speed)))) {
+                new Point((int) (pos.xpos + world.mapPos.xpos),
+                        (int) (pos.ypos + world.mapPos.ypos - speed)),
+                new Point((int) (pos.xpos + world.mapPos.xpos + width),
+                        (int) (pos.ypos + world.mapPos.ypos - speed)), world)) {
             if (speedUp < maxSpeed) {
                 speedUp += slowdown;
             } else {
                 speedUp = maxSpeed;
             }
-            World.mapPos.ypos -= speed;
+            world.mapPos.ypos -= speed;
         } else {
             speedUp = 0;
         }
     }
     public void moveMapUpGlide(float speed) {
         if (!Check.CollisionPlayerBlock(
-                new Point((int) (pos.xpos + World.mapPos.xpos),
-                        (int) (pos.ypos + World.mapPos.ypos - speed)),
-                new Point((int) (pos.xpos + World.mapPos.xpos + width),
-                        (int) (pos.ypos + World.mapPos.ypos - speed)))) {
+                new Point((int) (pos.xpos + world.mapPos.xpos),
+                        (int) (pos.ypos + world.mapPos.ypos - speed)),
+                new Point((int) (pos.xpos + world.mapPos.xpos + width),
+                        (int) (pos.ypos + world.mapPos.ypos - speed)), world)) {
             if (speedUp != 0) {
                 speedUp -= slowdown;
                 if (speedUp < 0) {
                     speedUp = 0;
                 }
             }
-            World.mapPos.ypos -= speed;
+            world.mapPos.ypos -= speed;
         } else {
             speedUp = 0;
         }
     }
     public void moveMapDown(float speed) {
         if (!Check.CollisionPlayerBlock(
-                new Point((int) (pos.xpos + World.mapPos.xpos),
-                        (int) (pos.ypos + World.mapPos.ypos + height + speed)),
-                new Point((int) (pos.xpos + World.mapPos.xpos + width),
-                        (int) (pos.ypos + World.mapPos.ypos + height + speed)))) {
+                new Point((int) (pos.xpos + world.mapPos.xpos),
+                        (int) (pos.ypos + world.mapPos.ypos + height + speed)),
+                new Point((int) (pos.xpos + world.mapPos.xpos + width),
+                        (int) (pos.ypos + world.mapPos.ypos + height + speed)), world)) {
             if (speedDown < maxSpeed) {
                 speedDown += slowdown;
             } else {
                 speedDown = maxSpeed;
             }
-            World.mapPos.ypos += speed;
+            world.mapPos.ypos += speed;
         } else {
             speedDown = 0;
         }
     }
     public void moveMapDownGlide(float speed) {
         if (!Check.CollisionPlayerBlock(
-                new Point((int) (pos.xpos + World.mapPos.xpos),
-                        (int) (pos.ypos + World.mapPos.ypos + height + speed)),
-                new Point((int) (pos.xpos + World.mapPos.xpos + width),
-                        (int) (pos.ypos + World.mapPos.ypos + height + speed)))) {
+                new Point((int) (pos.xpos + world.mapPos.xpos),
+                        (int) (pos.ypos + world.mapPos.ypos + height + speed)),
+                new Point((int) (pos.xpos + world.mapPos.xpos + width),
+                        (int) (pos.ypos + world.mapPos.ypos + height + speed)), world)) {
             if (speedDown != 0) {
                 speedDown -= slowdown;
                 if (speedDown < 0) {
                     speedDown = 0;
                 }
             }
-            World.mapPos.ypos += speed;
+            world.mapPos.ypos += speed;
         } else {
             speedDown = 0;
         }
     }
     public void moveMapRight(float speed) {
         if (!Check.CollisionPlayerBlock(
-                new Point((int) (pos.xpos + World.mapPos.xpos + width + speed),
-                        (int) (pos.ypos + World.mapPos.ypos)),
-                new Point((int) (pos.xpos + World.mapPos.xpos + width + speed),
-                        (int) (pos.ypos + World.mapPos.ypos + height)))) {
+                new Point((int) (pos.xpos + world.mapPos.xpos + width + speed),
+                        (int) (pos.ypos + world.mapPos.ypos)),
+                new Point((int) (pos.xpos + world.mapPos.xpos + width + speed),
+                        (int) (pos.ypos + world.mapPos.ypos + height)), world)) {
             if (speedRight < maxSpeed) {
                 speedRight += slowdown;
             } else {
                 speedRight = maxSpeed;
             }
-            World.mapPos.xpos += speed;
+            world.mapPos.xpos += speed;
         } else {
             speedRight = 0;
         }
     }
     public void moveMapRightGlide(float speed) {
         if (!Check.CollisionPlayerBlock(
-                new Point((int) (pos.xpos + World.mapPos.xpos + width + speed),
-                        (int) (pos.ypos + World.mapPos.ypos)),
-                new Point((int) (pos.xpos + World.mapPos.xpos + width + speed),
-                        (int) (pos.ypos + World.mapPos.ypos + height)))) {
+                new Point((int) (pos.xpos + world.mapPos.xpos + width + speed),
+                        (int) (pos.ypos + world.mapPos.ypos)),
+                new Point((int) (pos.xpos + world.mapPos.xpos + width + speed),
+                        (int) (pos.ypos + world.mapPos.ypos + height)), world)) {
             if (speedRight != 0) {
                 speedRight -= slowdown;
                 if (speedRight < 0) {
                     speedRight = 0;
                 }
             }
-            World.mapPos.xpos += speed;
+            world.mapPos.xpos += speed;
         } else {
             speedRight = 0;
         }
     }
     public void moveMapLeft(float speed) {
         if (!Check.CollisionPlayerBlock(
-                new Point((int) (pos.xpos + World.mapPos.xpos - speed),
-                        (int) (pos.ypos + World.mapPos.ypos + height)),
-                new Point((int) (pos.xpos + World.mapPos.xpos - speed),
-                        (int) (pos.ypos + World.mapPos.ypos)))) {
+                new Point((int) (pos.xpos + world.mapPos.xpos - speed),
+                        (int) (pos.ypos + world.mapPos.ypos + height)),
+                new Point((int) (pos.xpos + world.mapPos.xpos - speed),
+                        (int) (pos.ypos + world.mapPos.ypos)), world)) {
             if (speedLeft < maxSpeed) {
                 speedLeft += slowdown;
             } else {
                 speedLeft = maxSpeed;
             }
-            World.mapPos.xpos -= speed;
+            world.mapPos.xpos -= speed;
         } else {
             speedLeft = 0;
         }
     }
     public void moveMapLeftGlide(float speed) {
         if (!Check.CollisionPlayerBlock(
-                new Point((int) (pos.xpos + World.mapPos.xpos - speed),
-                        (int) (pos.ypos + World.mapPos.ypos + height)),
-                new Point((int) (pos.xpos + World.mapPos.xpos - speed),
-                        (int) (pos.ypos + World.mapPos.ypos)))) {
+                new Point((int) (pos.xpos + world.mapPos.xpos - speed),
+                        (int) (pos.ypos + world.mapPos.ypos + height)),
+                new Point((int) (pos.xpos + world.mapPos.xpos - speed),
+                        (int) (pos.ypos + world.mapPos.ypos)), world)) {
             if (speedLeft != 0) {
                 speedLeft -= slowdown;
                 if (speedLeft < 0) {
                     speedLeft = 0;
                 }
             }
-            World.mapPos.xpos -= speed;
+            world.mapPos.xpos -= speed;
         } else {
             speedLeft = 0;
         }
@@ -232,16 +232,11 @@ public class Player implements KeyListener {
 
     //////////////////////////
 
-    @Override
-    public void keyTyped(KeyEvent e) {
-
-    }
-    @Override
     public void keyPressed(KeyEvent e) {
         int key = e.getKeyCode();
 
         if(key == KeyEvent.VK_W) {
-            up = true;
+            this.up = true;
         }
         if(key == KeyEvent.VK_S) {
             down = true;
@@ -263,12 +258,12 @@ public class Player implements KeyListener {
         }
 
     }
-    @Override
+
     public void keyReleased(KeyEvent e) {
         int key = e.getKeyCode();
 
         if(key == KeyEvent.VK_W) {
-            up = false;
+            this.up = false;
         }
         if(key == KeyEvent.VK_S) {
             down = false;
@@ -296,7 +291,10 @@ public class Player implements KeyListener {
     public float getSlowdown() {
         return slowdown;
     }
-    public static boolean isDebug() {
+    public boolean isDebug() {
         return debug;
+    }
+    public World getWorld() {
+        return world;
     }
 }

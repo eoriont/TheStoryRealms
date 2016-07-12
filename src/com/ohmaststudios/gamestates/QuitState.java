@@ -7,6 +7,7 @@ import com.ohmaststudios.main.Game;
 import com.ohmaststudios.managers.MouseManager;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
 
 public class QuitState extends GameState {
 
@@ -47,5 +48,13 @@ public class QuitState extends GameState {
         no.render(g);
 
         mm.render(g);
+    }
+
+
+    public void keyPressed(KeyEvent e) {
+
+    }
+    public void keyReleased(KeyEvent e) {
+
     }
 }

@@ -10,7 +10,7 @@ import java.awt.image.BufferedImage;
 
 public class World {
 
-    public static Vector2F mapPos = new Vector2F();
+    public Vector2F mapPos = new Vector2F();
     private String worldName;
     private BufferedImage map;
     private int worldWidth, worldHeight;

@@ -6,6 +6,7 @@ import com.ohmaststudios.generator.World;
 import com.ohmaststudios.movableObjects.Player;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 
 public class LevelLoader extends GameState {
@@ -34,5 +35,12 @@ public class LevelLoader extends GameState {
     @Override
     public void render(Graphics2D g) {
         world.render(g);
+    }
+
+    public void keyPressed(KeyEvent e) {
+        world.getPlayer().keyPressed(e);
+    }
+    public void keyReleased(KeyEvent e) {
+        world.getPlayer().keyReleased(e);
     }
 }
