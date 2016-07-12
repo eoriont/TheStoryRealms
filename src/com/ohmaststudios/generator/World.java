@@ -15,8 +15,9 @@ public class World {
     private BufferedImage map;
     private int worldWidth, worldHeight;
     private Player player;
+    private int idCounter;
 
-    private TileManager tiles;
+    public TileManager tiles;
 
     private boolean hasSize = false;
 
@@ -28,7 +29,7 @@ public class World {
     }
 
     public void init() {
-        tiles = new TileManager();
+        tiles = new TileManager(this);
         if(player != null) player.init(this);
 
         mapPos.xpos = spawn.pos.xpos - player.getPos().xpos;
@@ -58,10 +59,12 @@ public class World {
                     int col = map.getRGB(x, y);
                     switch (col & 0xFFFFFF) {
                         case 0x808080:
-                            tiles.blocks.add(new Block(new Vector2F(x*Block.BlockSize, y*Block.BlockSize), Block.BlockType.STONE_1).isSolid(false));
+                            Block thing = new Block(new Vector2F(x*Block.BlockSize, y*Block.BlockSize), Block.BlockType.STONE_1, idCounter++).isSolid(false);
+                            tiles.blocks.put(thing.id, thing);
                             break;
                         case 0x404040:
-                            tiles.blocks.add(new Block(new Vector2F(x*Block.BlockSize, y*Block.BlockSize), Block.BlockType.WALL_1).isSolid(true));
+                            Block thing2 = new Block(new Vector2F(x*Block.BlockSize, y*Block.BlockSize), Block.BlockType.WALL_1, idCounter++).isSolid(true);
+                            tiles.blocks.put(thing2.id, thing2);
                             break;
 
                     }
@@ -73,7 +76,7 @@ public class World {
     public void setWorldSpawn(float xpos, float ypos) {
         if(xpos < worldWidth) {
             if(ypos < worldHeight) {
-                Block spawn = new Block(new Vector2F(xpos*Block.BlockSize, ypos*Block.BlockSize));
+                Block spawn = new Block(new Vector2F(xpos*Block.BlockSize, ypos*Block.BlockSize), idCounter++);
                 this.spawn = spawn;
             }
         }
@@ -99,5 +102,11 @@ public class World {
     }
     public float getWorldYpos() {
         return mapPos.ypos;
+    }
+    public TileManager getTiles() {
+        return tiles;
+    }
+    public Player getPlayer() {
+        return player;
     }
 }

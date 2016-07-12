@@ -15,18 +15,21 @@ public class Block extends Rectangle {
     private BufferedImage block;
     private boolean isSolid;
     public boolean isAlive;
+    public int id;
 
-    public Block(Vector2F pos, BlockType blockType) {
+    public Block(Vector2F pos, BlockType blockType, int id) {
         setBounds((int) pos.xpos, (int) pos.ypos, BlockSize, BlockSize);
         this.pos = pos;
+        this.id = id;
         isAlive = true;
         this.blockType = blockType;
         init();
     }
 
-    public Block(Vector2F pos) {
+    public Block(Vector2F pos, int id) {
         setBounds((int) pos.xpos, (int) pos.ypos, BlockSize, BlockSize);
         this.pos = pos;
+        this.id = id;
         isAlive = true;
     }
 

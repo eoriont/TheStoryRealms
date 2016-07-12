@@ -1,0 +1,57 @@
+package com.ohmaststudios.generator;
+
+import com.ohmaststudios.movableObjects.Player;
+
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
+
+public class TileManager {
+
+    public static ArrayList<Block> blocks = new ArrayList<Block>();
+    public static ArrayList<Block> blocksLoaded = new ArrayList<Block>();
+    public static int blocksAreAlive;
+
+    public TileManager() {
+
+    }
+
+    public void tick(double deltaTime) {
+
+        for(Block block : blocks) {
+            block.tick(deltaTime);
+
+            block.setAlive(Player.render.intersects(block));
+            if (Player.render.intersects(block)) {
+                if(Player.isDebug()) {
+                    if (!blocksLoaded.contains(block)) {
+                        blocksLoaded.add(block);
+                    }
+                } else {
+                    blocksLoaded.clear();
+                }
+            } else {
+                if(Player.isDebug()) {
+                    if (blocksLoaded.contains(block)) {
+                        blocksLoaded.remove(block);
+                    }
+                } else {
+                    blocksLoaded.clear();
+                }
+            }
+        }
+    }
+
+    public void render(Graphics2D g) {
+
+        blocksAreAlive = 0;
+
+        for(Block block : blocks) {
+            if(block.isAlive) {
+                blocksAreAlive++;
+                block.render(g);
+            }
+        }
+    }
+
+}

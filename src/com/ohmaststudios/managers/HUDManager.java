@@ -15,7 +15,6 @@ public class HUDManager {
 
     private Player player;
     private World world;
-    //private ArrayList<Block>
 
     public HUDManager(Player player, World world) {
         this.player = player;
@@ -30,7 +29,8 @@ public class HUDManager {
             g.drawString("(Map Xpos) " + world.getWorldXpos(), 20, 40);
             g.drawString("(Map Ypos) " + world.getWorldYpos(), 20, 60);
             g.drawString("(FPS) " + GameLoop.currFPS, 20, 80);
-            //g.drawString("(Blocks Loaded)" + );
+            g.drawString("(All Blocks) " +  world.getTiles().blocks.size(), 20, 100);
+            g.drawString("(Blocks Loaded) " +  world.getTiles().blocksLoaded.size(), 20, 120);
         }
     }
 
